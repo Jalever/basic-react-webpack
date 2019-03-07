@@ -62,10 +62,10 @@ react-dom
   "license": "ISC"
 }
 ```
-> Notes:
-> "private": true <br/>
-> "build": "webpack --progress --color"<br/>
-> "start": "webpack-dev-server --progress --color --open"
+> Notes:<br/>
+> &ensp;&ensp;"private": true <br/>
+> &ensp;&ensp;"build": "webpack --progress --color"<br/>
+> &ensp;&ensp;"start": "webpack-dev-server --progress --color --open"
 
 #### .babelrc
 &ensp;&ensp;最开始写的格式:
