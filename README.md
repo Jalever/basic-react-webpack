@@ -63,18 +63,18 @@ react-dom
 }
 ```
 > Notes:
-> "private": true
-> "build": "webpack --progress --color"
+> "private": true <br/>
+> "build": "webpack --progress --color"<br/>
 > "start": "webpack-dev-server --progress --color --open"
 
 #### .babelrc
-最开始写的格式:
+&ensp;&ensp;最开始写的格式:
 ```
 {
 	"presets": ["env","react"]
 }
 ```
-npx babel-upgrade --write --install升级之后自动会变成:
+&ensp;&ensp;npx babel-upgrade --write --install升级之后自动会变成:
 
 ```
 {
@@ -87,7 +87,7 @@ npx babel-upgrade --write --install升级之后自动会变成:
 ```
 
 #### .gitignore
-git push origin master时忽略的文件
+&ensp;&ensp;git push origin master时忽略的文件
 ```
 node_modules
 dist
