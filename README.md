@@ -1,2 +1,138 @@
 # Basic-React-Webpack
 It's basic react project with Webpack.
+
+## 基本配置
+
+#### 需要下载的包或插件
+```
+wepback 
+webpack-cli
+webpack-dev-server
+
+style-loader
+css-loader
+
+node-sass
+sass-loader
+
+clean-webpack-plugin
+html-webpack-plugin
+
+babel-loader
+babel-core
+babel-preset-env
+babel-preset-react
+npx babel-upgrade --write --install
+
+react
+react-dom
+```
+
+#### package.json
+```
+{
+  "name": "basic-react-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^2.0.0",
+    "css-loader": "^2.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.4",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress --color",
+    "start": "webpack-dev-server --progress --color --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+> Notes:
+> "private": true
+> "build": "webpack --progress --color"
+> "start": "webpack-dev-server --progress --color --open"
+
+#### .babelrc
+最开始写的格式:
+```
+{
+	"presets": ["env","react"]
+}
+```
+npx babel-upgrade --write --install升级之后自动会变成:
+
+```
+{
+	"presets": [
+		"@babel/preset-env",
+		"@babel/preset-react"
+	]
+}
+
+```
+
+#### .gitignore
+git push origin master时忽略的文件
+```
+node_modules
+dist
+```
+
+#### webpack.config.js
+```
+const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+
+module.exports = {
+	entry: {
+		app: "./src/index.jsx"
+	},
+	output: {
+		filename: "[name].[hash].js",
+		path: path.resolve(__dirname, "dist")
+	},
+	module: {
+		rules: [
+			{
+				test:/\.scss$/,
+				use:["style-loader","css-loader","sass-loader"]
+			},{
+				test:/\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: ["babel-loader"]
+			}
+		]
+	},
+	devtool: "inline-source-map",
+	devServer: {
+		contentBase: "./dist",
+		hot: true
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			title: "basic-react-router-tutorial",
+			template: "./src/index.html",
+			filename: "./index.html"
+		}),
+		new webpack.HotModuleReplacementPlugin()
+	]
+};
+```
+
