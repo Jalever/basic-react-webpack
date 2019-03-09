@@ -155,8 +155,7 @@ module.exports = {
 	optimization: {
 		runtimeChunk: "single",
 		splitChunks: {
-			chunks:'async',	//分割异步打包的代码
-			cacheGroup: {
+			cacheGroups: {
 				vendor: {
 					test: /[\\/]node_modules[\\/]/,
 					name: "vendors",
