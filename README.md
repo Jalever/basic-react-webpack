@@ -94,6 +94,23 @@ node_modules
 dist
 ```
 
+#### index.html
+&ensp;&ensp;./src/index.html 之后html-webpack-plugin插件后会生成./dist/index.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie-edge">
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>
+```
+
 #### webpack.config.js
 ```
 const path = require("path");
@@ -127,6 +144,7 @@ module.exports = {
 		hot: true
 	},
 	plugins: [
+		new CleanWebpackPlugin("./dist/*"),
 		new HtmlWebpackPlugin({
 			title: "basic-react-router-tutorial",
 			template: "./src/index.html",
