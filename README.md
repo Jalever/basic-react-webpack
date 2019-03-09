@@ -22,11 +22,12 @@ babel-loader
 babel-core
 babel-preset-env
 babel-preset-react
-npx babel-upgrade --write --install
 
 react
 react-dom
 ```
+
+> npx babel-upgrade --write --install
 
 #### package.json
 ```
@@ -132,7 +133,20 @@ module.exports = {
 			filename: "./index.html"
 		}),
 		new webpack.HotModuleReplacementPlugin()
-	]
+	],
+	optimization: {
+		runtimeChunk: "single",
+		splitChunks: {
+			chunks:'async',	//分割异步打包的代码
+			cacheGroup: {
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendors",
+					chunks: "all"
+				}
+			}
+		}
+	}
 };
 ```
 
