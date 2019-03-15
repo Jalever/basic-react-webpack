@@ -8,6 +8,7 @@ It's basic react project with Webpack.
 wepback 
 webpack-cli
 webpack-dev-server
+webpack-merge
 
 style-loader
 css-loader
@@ -151,17 +152,30 @@ module.exports = {
 			template: "./src/index.html",
 			filename: "./index.html"
 		}),
+		new webpack.HashedModuleIdsPlugin(),	// so that file hashes don't change unexpectedly
 		new webpack.HotModuleReplacementPlugin()
 	],
 	optimization: {
 		runtimeChunk: "single",
 		splitChunks: {
-			cacheGroups: {
+			chunks: "all",
+			maxInitialRequests: Infinity,
+			minSize: 0,
+			cacheGroups: {//define rules for how Webpack should group chunks into output files.
 				vendor: {
 					test: /[\\/]node_modules[\\/]/,
-					name: "vendors",
-					chunks: "all"
+					name(module) {
+		            // get the name. E.g. node_modules/packageName/not/this/part.js
+					// or node_modules/packageName
+
+						const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+						// npm package names are URL-safe, but some servers don't like @ symbols
+
+						return `npm.${packageName.replace("@","")}`;
+					}
 				}
+
 			}
 		}
 	}
